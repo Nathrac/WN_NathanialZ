@@ -15,7 +15,7 @@ public class AnimationTriggerPractice : MonoBehaviour
     {
         if (!animator.GetBool("Start"))
         {
-            buttonText.text = "Off";
+            buttonText.text = "Start";
         }
     }
     // Update is called once per frame
