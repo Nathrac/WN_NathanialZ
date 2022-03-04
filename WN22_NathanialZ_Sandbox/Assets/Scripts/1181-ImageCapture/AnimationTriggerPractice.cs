@@ -1,13 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class AnimationTriggerPractice : MonoBehaviour
 {
     public Animator animator;
     public GameObject sphere;
     [SerializeField] string paramater;
-   
+    [SerializeField] TextMeshProUGUI buttonText;
+
+    private void Start()
+    {
+        if (!animator.GetBool("Start"))
+        {
+            buttonText.text = "Off";
+        }
+    }
     // Update is called once per frame
     void Update()
     {
@@ -38,6 +48,20 @@ public class AnimationTriggerPractice : MonoBehaviour
         {
             animator.SetBool(paramater, false);
             animator.speed = 0.5f;
+        }
+    }
+
+    public void playAnimation()
+    {
+        if (!animator.GetBool("Start"))
+        {
+            animator.SetBool("Start", true);
+            buttonText.text = "Stop";
+        }
+        else
+        {
+            animator.SetBool("Start", false);
+            buttonText.text = "Start";
         }
     }
 
