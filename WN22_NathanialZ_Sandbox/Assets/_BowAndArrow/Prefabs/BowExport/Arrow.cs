@@ -5,7 +5,7 @@ public class Arrow : XRGrabInteractable
 {
     [Header("Settings")]
     public float speed = 2000.0f;
-
+    
     [Header("Hit")]
     public Transform tip = null;
     public LayerMask layerMask = ~Physics.IgnoreRaycastLayer;
@@ -16,11 +16,17 @@ public class Arrow : XRGrabInteractable
     private Vector3 lastPosition = Vector3.zero;
     private bool launched = false;
 
+
+    //Additions made by Nathanial
+    [SerializeField] GameObject vfx;
+    float timer = 0;
+
     protected override void Awake()
     {
         base.Awake();
         collider = GetComponent<Collider>();
         rigidbody = GetComponent<Rigidbody>();
+        vfx.SetActive(false);
     }
 
     protected override void OnSelectEntering(SelectEnterEventArgs args)
@@ -45,8 +51,19 @@ public class Arrow : XRGrabInteractable
         base.OnSelectExited(args);
 
         // If it's a notch, launch the arrow
+        //if (args.interactor is Notch notch)
+        //    Launch(notch);
         if (args.interactor is Notch notch)
+        {
             Launch(notch);
+            vfx.SetActive(true);
+            timer += Time.deltaTime;
+            if (timer > 5f)
+            {
+                vfx.SetActive(false);
+                timer = 0;
+            }
+        }
     }
 
     private void Launch(Notch notch)
@@ -114,10 +131,11 @@ public class Arrow : XRGrabInteractable
         if (Physics.Linecast(lastPosition, tip.position, out RaycastHit hit, layerMask))
         {
             TogglePhysics(false);
+            vfx.SetActive(false);
             ChildArrow(hit);
             CheckForHittable(hit);
         }
-
+        
         return hit.collider != null;
     }
 
@@ -145,4 +163,5 @@ public class Arrow : XRGrabInteractable
         if (hittable != null)
             hittable.Hit(this);
     }
+    
 }
