@@ -8,9 +8,6 @@ public class SavePrefs : MonoBehaviour
 {
     InfoChange ui;
 
-    int intToSave;
-    float floatToSave;
-    string stringToSave;
 
     private void Awake()
     { 
