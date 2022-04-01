@@ -5131,6 +5131,8 @@ GameObject:
   - component: {fileID: 7046829276956346025}
   - component: {fileID: 3544760493190169588}
   - component: {fileID: 961699093}
+  - component: {fileID: 5338894852844980194}
+  - component: {fileID: 3459872602885331784}
   m_Layer: 2
   m_Name: ArrowTesting
   m_TagString: Untagged
@@ -5297,6 +5299,47 @@ CapsuleCollider:
   m_Height: 1.0064399
   m_Direction: 2
   m_Center: {x: 0.004637705, y: 0, z: -0.10344887}
+--- !u!114 &5338894852844980194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8542102953145869890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -363599832, guid: c424820a8880b8845bda10ec0b41507e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _realtime: {fileID: 0}
+  _sceneViewUUID: 
+  _viewUUID: 
+  _sceneViewPreventOwnershipTakeover: 0
+  _sceneViewDestroyWhenOwnerOrLastClientLeaves: 1
+  _sceneViewDestroyWhenOwnerOrLastClientLeavesMigrated: 0
+  _sceneViewDestroyWhenLastClientLeaves: 1
+  _components:
+  - componentID: 1
+    component: {fileID: 3459872602885331784}
+  _childViews: []
+--- !u!114 &3459872602885331784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8542102953145869890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1029778088, guid: c424820a8880b8845bda10ec0b41507e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolate: 1
+  _syncPosition: 1
+  _syncRotation: 1
+  _syncScale: 1
+  _syncVelocity: 1
+  _maintainOwnershipWhileSleeping: 1
 --- !u!1 &8589002692731022628
 GameObject:
   m_ObjectHideFlags: 0

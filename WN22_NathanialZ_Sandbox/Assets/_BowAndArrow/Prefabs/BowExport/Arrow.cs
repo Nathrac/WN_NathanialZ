@@ -18,15 +18,19 @@ public class Arrow : XRGrabInteractable
 
 
     //Additions made by Nathanial
-    [SerializeField] GameObject vfx;
-    float timer = 0;
+    
+    ParticleSystemBool psb;
+    
 
     protected override void Awake()
     {
         base.Awake();
         collider = GetComponent<Collider>();
         rigidbody = GetComponent<Rigidbody>();
-        vfx.SetActive(false);
+        psb = GetComponent<ParticleSystemBool>();
+        psb.SetParticleBool(false);
+
+       
     }
 
     protected override void OnSelectEntering(SelectEnterEventArgs args)
@@ -56,13 +60,9 @@ public class Arrow : XRGrabInteractable
         if (args.interactor is Notch notch)
         {
             Launch(notch);
-            vfx.SetActive(true);
-            timer += Time.deltaTime;
-            if (timer > 5f)
-            {
-                vfx.SetActive(false);
-                timer = 0;
-            }
+            psb.SetParticleBool(true);
+
+
         }
     }
 
@@ -131,7 +131,7 @@ public class Arrow : XRGrabInteractable
         if (Physics.Linecast(lastPosition, tip.position, out RaycastHit hit, layerMask))
         {
             TogglePhysics(false);
-            vfx.SetActive(false);
+            psb.SetParticleBool(false);
             ChildArrow(hit);
             CheckForHittable(hit);
         }
