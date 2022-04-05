@@ -6,8 +6,12 @@ using System;
 
 public class ShaderGlowToggle : RealtimeComponent<ShaderModel>
 {
-    [SerializeField] Shader glow;
+    [SerializeField] Renderer glow;
     [SerializeField] string boolName;
+    [SerializeField] string weaponTag;
+    [SerializeField] BoxCollider colide;
+    [SerializeField] ColliderManager cM;
+    [SerializeField] AudioSource sfx;
 
     public void SetShaderBool(bool value)
     {
@@ -34,12 +38,24 @@ public class ShaderGlowToggle : RealtimeComponent<ShaderModel>
     {
         if (model.isGlowing)
         {
-            //set shader bool named by parameter to true
-            //possibly edit weakpoint list in this function. 
+            glow.material.EnableKeyword(boolName);
         }
         else
         {
-            //set shader bool named by parameter to false
+            glow.material.DisableKeyword(boolName);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag(weaponTag))
+        {
+            SetShaderBool(false);
+            cM.CollideHit();
+            //if (script.hit == 3) { for loop to activate colliderArray, set hit = 0, sgt.SetShaderBool(true), 
+            //script.hit ++;
+            //colide.enabled = false;
+
         }
     }
 }
