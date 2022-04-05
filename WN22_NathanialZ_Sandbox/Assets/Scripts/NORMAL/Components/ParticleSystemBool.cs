@@ -16,7 +16,18 @@ public class ParticleSystemBool : RealtimeComponent<ParticleSystemBoolModel>
 
     protected override void OnRealtimeModelReplaced(ParticleSystemBoolModel previousModel, ParticleSystemBoolModel currentModel)
     {
-        model.vfxOnDidChange += ToggleParticle;
+        if (previousModel != null)
+        {
+            previousModel.vfxOnDidChange -= ToggleParticle;
+        }
+        if (currentModel != null)
+        {
+            if (currentModel.isFreshModel)
+            {
+                model.vfxOn = false;
+            }
+            currentModel.vfxOnDidChange += ToggleParticle;
+        }
 
     }
 
