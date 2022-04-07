@@ -163,5 +163,12 @@ public class Arrow : XRGrabInteractable
         if (hittable != null)
             hittable.Hit(this);
     }
-    
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Minion"))
+        {
+            collision.gameObject.SetActive(false);
+        }
+    }
 }

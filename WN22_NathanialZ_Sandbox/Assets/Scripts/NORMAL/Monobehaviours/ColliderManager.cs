@@ -7,6 +7,8 @@ public class ColliderManager : MonoBehaviour
     int hit;
     BoxCollider[] colliderArray;
 
+    //isStunnedScript
+
     private void Awake()
     {
         hit = 0;
@@ -24,10 +26,11 @@ public class ColliderManager : MonoBehaviour
         }
     }
 
-    public void ResetColliders()
+    public void ResetColliders() //reset hit counter to 0 and reset collider array by going through the array and setting all disabled colliders to enabled.
     {
         if (hit == 3)
         {
+            hit = 0;
             for (int i = 0; i < colliderArray.Length; i++)
             {
                 if (!colliderArray[i].enabled)

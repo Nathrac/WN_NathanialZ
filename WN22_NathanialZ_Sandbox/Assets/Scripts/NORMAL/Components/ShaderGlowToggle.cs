@@ -6,8 +6,8 @@ using System;
 
 public class ShaderGlowToggle : RealtimeComponent<ShaderModel>
 {
-    [SerializeField] Renderer glow;
-    [SerializeField] string boolName;
+    [SerializeField] Renderer glow; //reference to the giant shader
+    [SerializeField] string boolName; //use to change the name of the shader bool parameter in the inspectore per weak point
     [SerializeField] string weaponTag;
     [SerializeField] BoxCollider colide;
     [SerializeField] ColliderManager cM;
@@ -38,24 +38,21 @@ public class ShaderGlowToggle : RealtimeComponent<ShaderModel>
     {
         if (model.isGlowing)
         {
-            glow.material.EnableKeyword(boolName);
+            glow.material.EnableKeyword(boolName); //if isGlowing is true, set the specified bool to turn on.
         }
         else
         {
-            glow.material.DisableKeyword(boolName);
+            glow.material.DisableKeyword(boolName); //turn off specified bool in the shader to turn off glow of weakpoint
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag(weaponTag))
+        if (collision.gameObject.CompareTag(weaponTag)) //on collision of custom weapon tag with giant collider set the shader bool off, disable collider, and add to hit counter.
         {
             SetShaderBool(false);
-            cM.CollideHit();
-            //if (script.hit == 3) { for loop to activate colliderArray, set hit = 0, sgt.SetShaderBool(true), 
-            //script.hit ++;
-            //colide.enabled = false;
-
+            colide.enabled = false;
+            cM.CollideHit();   
         }
     }
 }
