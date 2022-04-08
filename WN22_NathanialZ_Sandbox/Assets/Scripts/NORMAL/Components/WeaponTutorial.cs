@@ -4,6 +4,7 @@ using UnityEngine;
 using Normal.Realtime;
 using System;
 
+//Put this script on every rune for the weapon tutorial (1 on beserker rune, 1 on archer rune, 1 on mage rune)
 public class WeaponTutorial : RealtimeComponent<TutorialModel>
 {
     [SerializeField] BoxCollider runeCollider;
@@ -11,7 +12,7 @@ public class WeaponTutorial : RealtimeComponent<TutorialModel>
     [SerializeField] AudioSource soundFX;
     [SerializeField] string weaponTag;
     [SerializeField] string runeBool;
-    [SerializeField] Renderer runeGlow;
+    [SerializeField] Material runeGlow;
 
     public void TutorialHit()
     {
@@ -46,13 +47,13 @@ public class WeaponTutorial : RealtimeComponent<TutorialModel>
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag(weaponTag))
+        if (other.gameObject.CompareTag(weaponTag)) //if the other collider has the specified weapon tag to make each rune for each player
         {
-            TutorialHit();
-            runeGlow.material.EnableKeyword(runeBool);
-            runeCollider.enabled = false;
+            TutorialHit(); //add 1 to the tutorial int parameter
+            runeGlow.DisableKeyword(runeBool); //disable rune glow to show it's been hit
+            runeCollider.enabled = false; //disable rune collider so it cant be hit multiple times
             soundFX.Play();
         }
     }

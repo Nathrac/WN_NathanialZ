@@ -9,7 +9,7 @@ public class WeaponOwnershipControl : MonoBehaviour
     [SerializeField] RealtimeTransform _rtt;
     [SerializeField] XRGrabInteractable xrGrab;
 
-    public void SetWeaponOwner()
+    public void SetWeaponOwner() //If the weapon has no ownership set in the system, request ownership of the weapon.
     {
         if (!_rtt.isOwnedRemotelyInHierarchy)
         {
@@ -17,7 +17,7 @@ public class WeaponOwnershipControl : MonoBehaviour
         }
         else
         {
-            xrGrab.enabled = false;
+            xrGrab.enabled = false; //if weapon is owned by someone else, no one esle can grab the weapon but the owner.
         }
     }
     

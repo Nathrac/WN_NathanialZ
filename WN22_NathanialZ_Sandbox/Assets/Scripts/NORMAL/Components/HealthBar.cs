@@ -5,19 +5,19 @@ using Normal.Realtime;
 using UnityEngine.XR.Interaction.Toolkit;
 using System;
 
+//Put on VR Player Prefab
 public class HealthBar : RealtimeComponent<HealthBarModel>
 {
-    [SerializeField] int maxHealth, critHealth, dead;
-    [SerializeField] Renderer halo;
+    [SerializeField] float maxHealth, dead;
+    float mixValue; 
+    [SerializeField] Material halo, bracelet; //material renderer for both Halo above player and bracelet to show the player their own health
+    [SerializeField] string floatProperty; //reference bool names of halo shader
 
-    [SerializeField] string maxH, midH, critH; //reference bool names of halo shader
-    [SerializeField] ActionBasedContinuousMoveProvider conMove;
+    [SerializeField] ActionBasedContinuousMoveProvider conMove; //use to turn off locomotion when dead
 
     [SerializeField] Realtime rt;
 
-    List<GameObject> playerList = new List<GameObject>();
-
-    public void AddHealth(int value)//add health to player, if health goes over max health set the health to maxhealth
+    public void AddHealth(float value)//add health to player, if health goes over max health set the health to maxhealth
     {
         model.health += value;
         if (model.health >= maxHealth)
@@ -26,7 +26,7 @@ public class HealthBar : RealtimeComponent<HealthBarModel>
         }
     }
 
-    public void RemoveHealth(int value)//remove health from player, if health goes below health, set health to dead (0)
+    public void RemoveHealth(float value)//remove health from player, if health goes below health, set health to dead (0)
     {
         model.health -= value;
         if (model.health <= dead)
@@ -46,63 +46,33 @@ public class HealthBar : RealtimeComponent<HealthBarModel>
             if (currentModel.isFreshModel)
             {
                 model.health = maxHealth;
+                mixValue = 0;
             }
             currentModel.healthDidChange += EffectHealth;
         }
     }
 
-    private void EffectHealth(HealthBarModel model, int value)//change halo shader colour based on health value. If max, turn on maxHealth colour turn off the rest, similar process for in between max and critical and below critical.
+    private void EffectHealth(HealthBarModel model, float value)//change halo shader colour based on health value. If the player is dead then turn off movement then swap tag. 
     {
-        if (model.health == maxHealth)
-        {
-            halo.material.EnableKeyword(maxH);
-            halo.material.DisableKeyword(midH);
-            halo.material.DisableKeyword(critH);
-        }
-        else if (model.health >= critHealth && model.health < maxHealth)
-        {
-            halo.material.DisableKeyword(maxH);
-            halo.material.EnableKeyword(midH);
-            halo.material.DisableKeyword(critH);
-        }
-        else if (model.health < critHealth)
-        {
-            halo.material.DisableKeyword(maxH);
-            halo.material.DisableKeyword(midH);
-            halo.material.EnableKeyword(critH);
-        }
-        else if (model.health == dead)//if player is dead, turn off movement and change player tag.
+        ColorChange();
+        if (model.health == 0)
         {
             conMove.enabled = false;
             tag = "dead";
+
+            //Add check to see if all players are dead here
+        }
+        else
+        {
+            return;
         }
     }
 
-    private void Start()
+    private void ColorChange() //change colour of halo and bracelet based on current health state to manipulate float value of shader
     {
-        realtime.didConnectToRoom += DidConnect;
+        mixValue = model.health / maxHealth;
+        halo.SetFloat(floatProperty, mixValue);
+        bracelet.SetFloat(floatProperty, mixValue);
     }
 
-    private void DidConnect(Realtime realtime)
-    {
-        AddPlayer((uint)(rt.clientID));
-        
-    }
-
-    private void AddPlayer(uint playerID)
-    {
-        PlayerDataModel newModel = new PlayerDataModel();
-        newModel.isDead = false;
-        model.players.Add(playerID, newModel);
-    }
-
-    private bool GetDeathState(uint playerID)
-    {
-        return model.players[playerID].isDead;
-    }
-
-    private void SetDeathState(uint playerID)
-    {
-        model.players[playerID].isDead = true;
-    }
 }

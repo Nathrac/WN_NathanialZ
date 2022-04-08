@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//On Empty in the hierarchy
 public class ColliderManager : MonoBehaviour
 {
     int hit;
-    BoxCollider[] colliderArray;
+    BoxCollider[] colliderArray; //fill array with the colliders for the weak points of the giant.
 
     //isStunnedScript
 
@@ -14,18 +15,24 @@ public class ColliderManager : MonoBehaviour
         hit = 0;
     }
 
-    public void CollideHit()
+    public void CollideHit()//Function called in the toggle script to add to hit counter. after adding, check if counter is = 3 and if it is then activate isStunned bool
     {
         if (hit < 3)
         {
             hit++;
+            if (hit == 3)
+            {
+                //reference isStunned script
+                Debug.Log("isStunned = true");
+            }
         }
-        else if (hit == 3)
+        else 
         {
-            //reference myles isStunned Componenent and set it to true.
+            return;
         }
     }
 
+    //Call whenever isStunned is being set back to false
     public void ResetColliders() //reset hit counter to 0 and reset collider array by going through the array and setting all disabled colliders to enabled.
     {
         if (hit == 3)

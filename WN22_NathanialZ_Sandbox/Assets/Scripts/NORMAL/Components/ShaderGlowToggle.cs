@@ -4,13 +4,14 @@ using UnityEngine;
 using Normal.Realtime;
 using System;
 
+//Put on every weak point collider on the giant
 public class ShaderGlowToggle : RealtimeComponent<ShaderModel>
 {
-    [SerializeField] Renderer glow; //reference to the giant shader
+    [SerializeField] Material glow; //reference to the giant shader
     [SerializeField] string boolName; //use to change the name of the shader bool parameter in the inspectore per weak point
-    [SerializeField] string weaponTag;
-    [SerializeField] BoxCollider colide;
-    [SerializeField] ColliderManager cM;
+    [SerializeField] string weaponTag; 
+    [SerializeField] BoxCollider colide; //The collider of the empty this script is on
+    [SerializeField] ColliderManager cM; //Game Manager for the giant weakpoint sequence
     [SerializeField] AudioSource sfx;
 
     public void SetShaderBool(bool value)
@@ -38,17 +39,17 @@ public class ShaderGlowToggle : RealtimeComponent<ShaderModel>
     {
         if (model.isGlowing)
         {
-            glow.material.EnableKeyword(boolName); //if isGlowing is true, set the specified bool to turn on.
+            glow.EnableKeyword(boolName); //if isGlowing is true, set the specified bool to turn on.
         }
         else
         {
-            glow.material.DisableKeyword(boolName); //turn off specified bool in the shader to turn off glow of weakpoint
+            glow.DisableKeyword(boolName); //turn off specified bool in the shader to turn off glow of weakpoint
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag(weaponTag)) //on collision of custom weapon tag with giant collider set the shader bool off, disable collider, and add to hit counter.
+        if (collision.gameObject.CompareTag(weaponTag)) //on collision of custom weapon tag(arrow) with giant collider set the shader bool off, disable collider, and add to hit counter.
         {
             SetShaderBool(false);
             colide.enabled = false;
