@@ -9,11 +9,11 @@ using System;
 public class HealthBar : RealtimeComponent<HealthBarModel>
 {
     [SerializeField] float maxHealth, dead;
-    float mixValue; 
-    [SerializeField] Material halo, bracelet; //material renderer for both Halo above player and bracelet to show the player their own health
+    float mixValue;
+    [SerializeField] Material halo;// bracelet; //material renderer for both Halo above player and bracelet to show the player their own health
     [SerializeField] string floatProperty; //reference bool names of halo shader
 
-    [SerializeField] ActionBasedContinuousMoveProvider conMove; //use to turn off locomotion when dead
+    //[SerializeField] ActionBasedContinuousMoveProvider conMove; //use to turn off locomotion when dead
 
     [SerializeField] Realtime rt;
 
@@ -57,7 +57,7 @@ public class HealthBar : RealtimeComponent<HealthBarModel>
         ColorChange();
         if (model.health == 0)
         {
-            conMove.enabled = false;
+            //conMove.enabled = false;
             tag = "dead";
 
             //Add check to see if all players are dead here
@@ -72,7 +72,7 @@ public class HealthBar : RealtimeComponent<HealthBarModel>
     {
         mixValue = model.health / maxHealth;
         halo.SetFloat(floatProperty, mixValue);
-        bracelet.SetFloat(floatProperty, mixValue);
+        //bracelet.SetFloat(floatProperty, mixValue);
     }
 
 }

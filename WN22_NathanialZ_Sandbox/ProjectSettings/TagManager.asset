@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Glasses
+  - Axe
+  - Arrow
   layers:
   - Default
   - TransparentFX
@@ -18,7 +20,7 @@ TagManager:
   - Rig
   - GrabL
   - GrabR
-  - 
+  - Player
   - 
   - 
   - 

@@ -6,13 +6,13 @@ using UnityEngine;
 public class MonsterAttack : MonoBehaviour
 {
     [SerializeField] HealthBar hb;
-    [SerializeField] float healthChange;
+    [SerializeField] float removeHealth;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            hb.RemoveHealth(healthChange); //when minion hits player remove from their health
+            hb.RemoveHealth(removeHealth); //when minion hits player remove from their health
         }
     }
 }

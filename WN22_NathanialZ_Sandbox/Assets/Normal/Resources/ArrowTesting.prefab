@@ -5133,9 +5133,10 @@ GameObject:
   - component: {fileID: 961699093}
   - component: {fileID: 5338894852844980194}
   - component: {fileID: 3459872602885331784}
+  - component: {fileID: 195175352876541995}
   m_Layer: 2
   m_Name: ArrowTesting
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5268,7 +5269,6 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 4294967291
-  vfx: {fileID: 7598353876778758617}
 --- !u!54 &3544760493190169588
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5321,6 +5321,8 @@ MonoBehaviour:
   _components:
   - componentID: 1
     component: {fileID: 3459872602885331784}
+  - componentID: 2
+    component: {fileID: 195175352876541995}
   _childViews: []
 --- !u!114 &3459872602885331784
 MonoBehaviour:
@@ -5340,6 +5342,19 @@ MonoBehaviour:
   _syncScale: 1
   _syncVelocity: 1
   _maintainOwnershipWhileSleeping: 1
+--- !u!114 &195175352876541995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8542102953145869890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a564227f9c298d548a99f7146adfca30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particle: {fileID: 1345054600810665009}
 --- !u!1 &8589002692731022628
 GameObject:
   m_ObjectHideFlags: 0

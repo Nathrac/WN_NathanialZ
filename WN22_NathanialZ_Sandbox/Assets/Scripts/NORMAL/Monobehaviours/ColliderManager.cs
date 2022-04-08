@@ -6,7 +6,7 @@ using UnityEngine;
 public class ColliderManager : MonoBehaviour
 {
     int hit;
-    BoxCollider[] colliderArray; //fill array with the colliders for the weak points of the giant.
+    [SerializeField] BoxCollider[] colliderArray; //fill array with the colliders for the weak points of the giant.
 
     //isStunnedScript
 

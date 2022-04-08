@@ -5,7 +5,7 @@ using Normal.Realtime;
 using System;
 
 //Put on every weak point collider on the giant
-public class ShaderGlowToggle : RealtimeComponent<ShaderModel>
+public class GiantWeakSpots : RealtimeComponent<ShaderModel>
 {
     [SerializeField] Material glow; //reference to the giant shader
     [SerializeField] string boolName; //use to change the name of the shader bool parameter in the inspectore per weak point
