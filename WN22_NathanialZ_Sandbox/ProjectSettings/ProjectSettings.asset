@@ -135,7 +135,13 @@ PlayerSettings:
     16:9: 1
     Others: 1
   bundleVersion: 0.1
-  preloadedAssets: []
+  preloadedAssets:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 11400000, guid: ca15d1c50cbf04c44b02ca10be6ad8da, type: 2}
+  - {fileID: 0}
+  - {fileID: 3023759931513376513, guid: 08ad081effceeff4884d869b6d6e40bb, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -600,6 +606,7 @@ PlayerSettings:
   webGLDecompressionFallback: 0
   scriptingDefineSymbols:
     1: NORMCORE
+    7: NORMCORE
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:

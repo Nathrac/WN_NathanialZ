@@ -10,13 +10,14 @@ public class HealthBar : RealtimeComponent<HealthBarModel>
 {
     [SerializeField] float maxHealth, dead;
     float mixValue;
-    [SerializeField] Material halo;// bracelet; //material renderer for both Halo above player and bracelet to show the player their own health
+    [SerializeField] Renderer halo;// bracelet; //material renderer for both Halo above player and bracelet to show the player their own health
     [SerializeField] string floatProperty; //reference bool names of halo shader
 
-    //[SerializeField] ActionBasedContinuousMoveProvider conMove; //use to turn off locomotion when dead
+    [SerializeField] ActionBasedContinuousMoveProvider conMove; //use to turn off locomotion when dead
 
     [SerializeField] Realtime rt;
-
+    [SerializeField] RealtimeAvatarManager aM;
+    
     public void AddHealth(float value)//add health to player, if health goes over max health set the health to maxhealth
     {
         model.health += value;
@@ -55,10 +56,12 @@ public class HealthBar : RealtimeComponent<HealthBarModel>
     private void EffectHealth(HealthBarModel model, float value)//change halo shader colour based on health value. If the player is dead then turn off movement then swap tag. 
     {
         ColorChange();
+        Debug.Log(model.health);
         if (model.health == 0)
         {
-            //conMove.enabled = false;
+            conMove.enabled = false;
             tag = "dead";
+            
 
             //Add check to see if all players are dead here
         }
@@ -71,7 +74,7 @@ public class HealthBar : RealtimeComponent<HealthBarModel>
     private void ColorChange() //change colour of halo and bracelet based on current health state to manipulate float value of shader
     {
         mixValue = model.health / maxHealth;
-        halo.SetFloat(floatProperty, mixValue);
+        halo.material.SetFloat(floatProperty, mixValue);
         //bracelet.SetFloat(floatProperty, mixValue);
     }
 

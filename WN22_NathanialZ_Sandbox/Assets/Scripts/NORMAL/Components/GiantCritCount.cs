@@ -8,7 +8,7 @@ using System;
 public class GiantCritCount : RealtimeComponent<GiantCritModel>
 {
     [SerializeField] BoxCollider critCollider;
-    [SerializeField] Material critGlow;
+    [SerializeField] Renderer critGlow;
     [SerializeField] string weaponTag;
     [SerializeField] string boolName;
 
@@ -52,9 +52,10 @@ public class GiantCritCount : RealtimeComponent<GiantCritModel>
     {
         if (other.gameObject.CompareTag(weaponTag))
         {
-            critGlow.DisableKeyword(boolName);
+            critGlow.material.SetInt(boolName, 0);
             critCollider.enabled = false;
             CritHit();
+            Debug.Log("Crit");
         }
     }
 
@@ -63,7 +64,7 @@ public class GiantCritCount : RealtimeComponent<GiantCritModel>
         if (!critCollider.enabled)
         {
             critCollider.enabled = true;
-            critGlow.EnableKeyword(boolName);
+            critGlow.material.SetInt(boolName, 1);
         }
     }
 
@@ -73,4 +74,6 @@ public class GiantCritCount : RealtimeComponent<GiantCritModel>
         yield return new WaitForSeconds(timeBeforeQuit);
         Application.Quit();
     }
+
+    
 }

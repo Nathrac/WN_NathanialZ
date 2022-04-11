@@ -5269,6 +5269,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 4294967291
+  psb: {fileID: 195175352876541995}
 --- !u!54 &3544760493190169588
 Rigidbody:
   m_ObjectHideFlags: 0

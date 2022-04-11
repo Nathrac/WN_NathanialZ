@@ -897,6 +897,33 @@
                     "isPartOfComposite": true
                 }
             ]
+        },
+        {
+            "name": "StaffAbility",
+            "id": "ca1b74f9-2e5c-4fa6-923c-54c75f09d494",
+            "actions": [
+                {
+                    "name": "Slowing",
+                    "type": "Button",
+                    "id": "aa501ff1-da79-4a6f-a1aa-2b52808bb632",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold"
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "a0cff98a-e765-4398-8592-18a83f63edff",
+                    "path": "<XRController>/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Slowing",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

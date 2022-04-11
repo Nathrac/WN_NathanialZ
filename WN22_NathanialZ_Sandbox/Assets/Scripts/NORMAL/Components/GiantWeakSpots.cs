@@ -14,6 +14,8 @@ public class GiantWeakSpots : RealtimeComponent<ShaderModel>
     [SerializeField] ColliderManager cM; //Game Manager for the giant weakpoint sequence
     [SerializeField] AudioSource sfx;
 
+   
+
     public void SetShaderBool(bool value)
     {
         model.isGlowing = value;
@@ -47,13 +49,18 @@ public class GiantWeakSpots : RealtimeComponent<ShaderModel>
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+
+    
+
+    private void OnTriggerStay(Collider other)
     {
-        if (collision.gameObject.CompareTag(weaponTag)) //on collision of custom weapon tag(arrow) with giant collider set the shader bool off, disable collider, and add to hit counter.
+        if (other.gameObject.CompareTag(weaponTag))
         {
             SetShaderBool(false);
             colide.enabled = false;
-            cM.CollideHit();   
+            cM.CollideHit();
+            Debug.Log("trigger");
         }
     }
+
 }

@@ -34,7 +34,7 @@ public class Quiver : XRBaseInteractable
         var options = new Realtime.InstantiateOptions()
         {
             ownedByClient = true,
-            preventOwnershipTakeover = true,
+            preventOwnershipTakeover = false,
             useInstance = _realtime
         };
         GameObject row = Realtime.Instantiate(arrowPrefab.name, orientation.position, orientation.rotation, options);

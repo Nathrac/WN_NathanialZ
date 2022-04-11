@@ -19,7 +19,7 @@ public class Arrow : XRGrabInteractable
 
     //Additions made by Nathanial
     
-    ParticleSystemBool psb;
+    [SerializeField] ParticleSystemBool psb;
     
 
     protected override void Awake()
@@ -27,8 +27,8 @@ public class Arrow : XRGrabInteractable
         base.Awake();
         collider = GetComponent<Collider>();
         rigidbody = GetComponent<Rigidbody>();
-        psb = GetComponent<ParticleSystemBool>();
-        psb.SetParticleBool(false);
+        
+        //psb.SetParticleBool(false);
 
        
     }
@@ -60,7 +60,7 @@ public class Arrow : XRGrabInteractable
         if (args.interactor is Notch notch)
         {
             Launch(notch);
-            psb.SetParticleBool(true);
+            //psb.SetParticleBool(true);
 
 
         }
@@ -131,7 +131,7 @@ public class Arrow : XRGrabInteractable
         if (Physics.Linecast(lastPosition, tip.position, out RaycastHit hit, layerMask))
         {
             TogglePhysics(false);
-            psb.SetParticleBool(false);
+            //psb.SetParticleBool(false);
             ChildArrow(hit);
             CheckForHittable(hit);
         }
@@ -171,4 +171,6 @@ public class Arrow : XRGrabInteractable
             collision.gameObject.SetActive(false);
         }
     }
+
+   
 }
