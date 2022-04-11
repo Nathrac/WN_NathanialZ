@@ -24,7 +24,7 @@ public class ParticleSystemBool : RealtimeComponent<ParticleSystemBoolModel>
         {
             if (currentModel.isFreshModel)
             {
-                model.vfxOn = false;
+                model.vfxOn = true;
             }
             currentModel.vfxOnDidChange += ToggleParticle;
         }

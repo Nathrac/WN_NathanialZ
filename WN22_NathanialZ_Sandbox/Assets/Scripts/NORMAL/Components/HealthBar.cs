@@ -13,11 +13,18 @@ public class HealthBar : RealtimeComponent<HealthBarModel>
     [SerializeField] Renderer halo;// bracelet; //material renderer for both Halo above player and bracelet to show the player their own health
     [SerializeField] string floatProperty; //reference bool names of halo shader
 
-    [SerializeField] ActionBasedContinuousMoveProvider conMove; //use to turn off locomotion when dead
+    ActionBasedContinuousMoveProvider conMove; //use to turn off locomotion when dead
 
-    [SerializeField] Realtime rt;
-    [SerializeField] RealtimeAvatarManager aM;
-    
+    Realtime rt;
+    RealtimeAvatarManager aM;
+
+    private void Start()
+    {
+        conMove = GameObject.Find("XR Rig").GetComponent<ActionBasedContinuousMoveProvider>();
+        rt = GameObject.Find("Realtime + VR Player").GetComponent<Realtime>();
+        aM = GameObject.Find("Realtime + VR Player").GetComponent<RealtimeAvatarManager>();
+    }
+
     public void AddHealth(float value)//add health to player, if health goes over max health set the health to maxhealth
     {
         model.health += value;
@@ -34,6 +41,7 @@ public class HealthBar : RealtimeComponent<HealthBarModel>
         {
             model.health = dead;
         }
+        Debug.Log("remove");
     }
 
     protected override void OnRealtimeModelReplaced(HealthBarModel previousModel, HealthBarModel currentModel)
@@ -61,14 +69,22 @@ public class HealthBar : RealtimeComponent<HealthBarModel>
         {
             conMove.enabled = false;
             tag = "dead";
-            
-
-            //Add check to see if all players are dead here
+            for (int i = 0; i < aM.avatars.Count; i++)
+            {
+                if (aM.avatars[i].gameObject.tag != "dead")
+                {
+                    return;
+                }
+                else
+                {
+                    if (i == aM.avatars.Count - 1)
+                    {
+                        Debug.Log("all dead");
+                    }
+                }
+            }
         }
-        else
-        {
-            return;
-        }
+      
     }
 
     private void ColorChange() //change colour of halo and bracelet based on current health state to manipulate float value of shader

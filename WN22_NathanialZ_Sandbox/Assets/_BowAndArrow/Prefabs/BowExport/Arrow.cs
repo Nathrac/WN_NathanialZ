@@ -33,6 +33,11 @@ public class Arrow : XRGrabInteractable
        
     }
 
+    private void Start()
+    {
+        psb.SetParticleBool(false);
+    }
+
     protected override void OnSelectEntering(SelectEnterEventArgs args)
     {
         // Do this first, so we get the right physics values
@@ -60,7 +65,8 @@ public class Arrow : XRGrabInteractable
         if (args.interactor is Notch notch)
         {
             Launch(notch);
-            //psb.SetParticleBool(true);
+
+            psb.SetParticleBool(true);
 
 
         }
@@ -131,7 +137,9 @@ public class Arrow : XRGrabInteractable
         if (Physics.Linecast(lastPosition, tip.position, out RaycastHit hit, layerMask))
         {
             TogglePhysics(false);
-            //psb.SetParticleBool(false);
+            
+            psb.SetParticleBool(false);
+
             ChildArrow(hit);
             CheckForHittable(hit);
         }

@@ -10,6 +10,7 @@ public class WeaponTutorialColliders : MonoBehaviour
     [SerializeField] string weaponTag;
     [SerializeField] string runeBool;
     [SerializeField] Renderer runeGlow;
+    bool isHit = false;
 
     [SerializeField] WeaponTutorial wTC;
 
@@ -19,8 +20,12 @@ public class WeaponTutorialColliders : MonoBehaviour
         {
             runeCollider.enabled = false; //disable rune collider so it cant be hit multiple times
 
-            wTC.TutorialHit(); //add 1 to the tutorial int parameter
-            
+            if (!isHit)
+            {
+                wTC.TutorialHit(); //add 1 to the tutorial int parameter
+                isHit = true;
+            }
+                        
             runeGlow.material.SetFloat(runeBool, 0f); //disable rune glow to show it's been hit
           
             soundFX.Play();

@@ -2,17 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//Put on minions
+//Put on enemys 
 public class MonsterAttack : MonoBehaviour
 {
-    [SerializeField] HealthBar hb;
+    HealthBar hb;
     [SerializeField] float removeHealth;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            hb.RemoveHealth(removeHealth); //when minion hits player remove from their health
+            Debug.Log("Player hit");
+            hb = other.GetComponent<HealthBar>();
+            hb.RemoveHealth(removeHealth); //when enemy hits player remove from their health
         }
     }
 }

@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Normal.Realtime;
-using System;
 
-//Put this script on every rune for the weapon tutorial (1 on beserker rune, 1 on archer rune, 1 on mage rune)
+//Put this script on gate
 public class WeaponTutorial : RealtimeComponent<TutorialModel>
 {
     [SerializeField] GameObject gate;
