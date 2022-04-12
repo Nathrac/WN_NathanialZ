@@ -8,6 +8,7 @@ public class WeaponOwnershipControl : MonoBehaviour
 {
     [SerializeField] RealtimeTransform _rtt;
     [SerializeField] XRGrabInteractable xrGrab;
+    [SerializeField] GameObject quiver;
 
     public void SetWeaponOwner() //If the weapon has no ownership set in the system, request ownership of the weapon.
     {
@@ -19,6 +20,11 @@ public class WeaponOwnershipControl : MonoBehaviour
         {
             xrGrab.enabled = false; //if weapon is owned by someone else, no one esle can grab the weapon but the owner.
         }
+    }
+
+    public void TurnOnQuiver()
+    {
+        quiver.SetActive(true);
     }
     
 }

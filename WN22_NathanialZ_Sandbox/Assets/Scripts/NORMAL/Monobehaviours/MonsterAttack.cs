@@ -17,4 +17,13 @@ public class MonsterAttack : MonoBehaviour
             hb.RemoveHealth(removeHealth); //when enemy hits player remove from their health
         }
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Player hit");
+            hb = collision.gameObject.GetComponent<HealthBar>();
+            hb.RemoveHealth(removeHealth); //when enemy hits player remove from their health
+        }
+    }
 }
