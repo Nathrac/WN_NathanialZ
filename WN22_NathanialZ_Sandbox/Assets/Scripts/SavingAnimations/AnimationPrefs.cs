@@ -75,6 +75,8 @@ public class AnimationPrefs : MonoBehaviour
     public void QuitGame()
     {
         SaveGame();
-        UnityEditor.EditorApplication.isPlaying = false;
+        //UnityEditor.EditorApplication.isPlaying = false;
+        //commented out for build reasons
+
     }
 }
