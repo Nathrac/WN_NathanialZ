@@ -68,7 +68,7 @@ public class Arrow : XRGrabInteractable
 
             psb.SetParticleBool(true);
 
-
+            Invoke("Lifetime", 10f); //destroy object after 10 seconds
         }
     }
 
@@ -180,5 +180,9 @@ public class Arrow : XRGrabInteractable
         }
     }
 
+    void Lifetime() //destroy arrow
+    {
+        Destroy(this);
+    }
    
 }

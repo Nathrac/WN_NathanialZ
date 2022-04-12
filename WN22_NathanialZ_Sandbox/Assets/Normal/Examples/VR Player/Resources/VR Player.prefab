@@ -92,9 +92,12 @@ GameObject:
   - component: {fileID: 4903995628154096}
   - component: {fileID: 33393833045040206}
   - component: {fileID: 23123477684580134}
-  m_Layer: 0
+  - component: {fileID: 2598958594945441341}
+  - component: {fileID: 8324282816650441866}
+  - component: {fileID: 5992106642490953957}
+  m_Layer: 12
   m_Name: HeadModel
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -163,6 +166,58 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2598958594945441341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1287233760419046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -363599832, guid: c424820a8880b8845bda10ec0b41507e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _realtime: {fileID: 0}
+  _sceneViewUUID: 
+  _viewUUID: 
+  _sceneViewPreventOwnershipTakeover: 0
+  _sceneViewDestroyWhenOwnerOrLastClientLeaves: 1
+  _sceneViewDestroyWhenOwnerOrLastClientLeavesMigrated: 0
+  _sceneViewDestroyWhenLastClientLeaves: 1
+  _components:
+  - componentID: 1
+    component: {fileID: 8324282816650441866}
+  _childViews: []
+--- !u!114 &8324282816650441866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1287233760419046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1d2117f7528cff4a896e03999fd475f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  dead: 0
+  halo: {fileID: 7020585237217485378}
+  floatProperty: BlendAmount
+--- !u!135 &5992106642490953957
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1287233760419046}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.1434432
+  m_Center: {x: 0.000000014901161, y: 0, z: -0.12000002}
 --- !u!1 &1315796314851182
 GameObject:
   m_ObjectHideFlags: 0
@@ -280,7 +335,6 @@ GameObject:
   - component: {fileID: 114879240156072798}
   - component: {fileID: 114800176784454794}
   - component: {fileID: 114272718057082298}
-  - component: {fileID: 1777554633490183965}
   m_Layer: 0
   m_Name: VR Player
   m_TagString: Player
@@ -330,15 +384,13 @@ MonoBehaviour:
     component: {fileID: 114800176784454794}
   - componentID: 2
     component: {fileID: 114272718057082298}
-  - componentID: 3
-    component: {fileID: 1777554633490183965}
   _childViews:
   - viewID: 1
-    view: {fileID: 114098979720017432}
-  - viewID: 2
-    view: {fileID: 114397248209533090}
-  - viewID: 3
     view: {fileID: 114142483780946230}
+  - viewID: 2
+    view: {fileID: 114098979720017432}
+  - viewID: 3
+    view: {fileID: 114397248209533090}
 --- !u!114 &114800176784454794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -372,22 +424,6 @@ MonoBehaviour:
   _syncScale: 1
   _syncVelocity: 1
   _maintainOwnershipWhileSleeping: 0
---- !u!114 &1777554633490183965
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1435502846325602}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1d2117f7528cff4a896e03999fd475f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  dead: 0
-  halo: {fileID: 7020585237217485378}
-  floatProperty: BlendAmount
 --- !u!1 &1573471737031190
 GameObject:
   m_ObjectHideFlags: 0
@@ -685,7 +721,9 @@ MonoBehaviour:
     component: {fileID: 114852635989410700}
   - componentID: 2
     component: {fileID: 114483422340737214}
-  _childViews: []
+  _childViews:
+  - viewID: 1
+    view: {fileID: 2598958594945441341}
 --- !u!114 &114852635989410700
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -11,10 +11,19 @@ using System;
 //Put On Staff
 public class StaffAbilities : RealtimeComponent<StaffModel>
 {
+    //slowing
     [SerializeField] Animator giantAnimator;
     float prevSpeed; //to get animation speed before pausing animation with slowing ability.
+    
+    //Healing components
+    bool canHeal = false;
+    [SerializeField] Transform startpoint;
+    [SerializeField] float raycastLenght;
+    [SerializeField] float healValue;
+    
 
     [SerializeField] InputActionReference slowingAbilityAction;
+    [SerializeField] InputActionReference healingAbility;
     XRGrabInteractable grabInteractable;
     XRBaseInteractor interactor;
 
@@ -22,10 +31,12 @@ public class StaffAbilities : RealtimeComponent<StaffModel>
     private void OnEnable()
     {
         slowingAbilityAction.action.Enable();
+        healingAbility.action.Enable();
     }
     private void OnDisable()
     {
         slowingAbilityAction.action.Disable();
+        healingAbility.action.Disable();
     }
 
 
@@ -35,6 +46,34 @@ public class StaffAbilities : RealtimeComponent<StaffModel>
         grabInteractable = GetComponent<XRGrabInteractable>();
         slowingAbilityAction.action.performed += AbilityStarted; //when action preformed activate ability
         slowingAbilityAction.action.canceled += AbilityCanceled; //when button released, deactivate ability
+
+
+        healingAbility.action.performed += HealingStarted;
+        healingAbility.action.canceled += HealingStopped;
+    }
+
+    private void HealingStopped(InputAction.CallbackContext obj)
+    {
+        if (obj.control.ToString().Contains("Left") && interactor.name.Contains("Left"))
+        {
+            canHeal = false;
+        }
+        else if (obj.control.ToString().Contains("Right") && interactor.name.Contains("Right"))
+        {
+            canHeal = false;
+        }
+    }
+
+    private void HealingStarted(InputAction.CallbackContext obj)
+    {
+        if (obj.control.ToString().Contains("Left") && interactor.name.Contains("Left"))
+        {
+            canHeal = true;
+        }
+        else if (obj.control.ToString().Contains("Right") && interactor.name.Contains("Right"))
+        {
+            canHeal = true;
+        }
     }
 
     private void AbilityStarted(InputAction.CallbackContext obj) //if button held then activate the ability to slow down giant. Checks for both right hand and left hand so that either hand can hold staff and activate ability
@@ -105,6 +144,18 @@ public class StaffAbilities : RealtimeComponent<StaffModel>
         {
             giantAnimator.speed = prevSpeed; //if model bool is false set the animation speed to what it was before changing to 0. 
         }
+    }
+
+    private void FixedUpdate() //set fixed timestep to 0.0138
+    {
+        RaycastHit hit;
+
+        if (Physics.Raycast(startpoint.position, transform.TransformDirection(Vector3.forward), out hit, raycastLenght, LayerMask.GetMask("Player")) && canHeal)
+        {
+            HealthBar hb = hit.collider.gameObject.GetComponent<HealthBar>();
+            hb.AddHealth(healValue);
+        }
+
     }
 }
 

@@ -10,20 +10,21 @@ public class MonsterAttack : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+       
         if (other.gameObject.CompareTag("Player"))
         {
             Debug.Log("Player hit");
-            hb = other.GetComponent<HealthBar>();
+            hb = other.gameObject.GetComponent<HealthBar>();
             hb.RemoveHealth(removeHealth); //when enemy hits player remove from their health
         }
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            Debug.Log("Player hit");
-            hb = collision.gameObject.GetComponent<HealthBar>();
-            hb.RemoveHealth(removeHealth); //when enemy hits player remove from their health
-        }
-    }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Player"))
+    //    {
+    //        Debug.Log("Player hit");
+    //        hb = collision.gameObject.GetComponent<HealthBar>();
+    //        hb.RemoveHealth(removeHealth); //when enemy hits player remove from their health
+    //    }
+    //}
 }
